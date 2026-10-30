@@ -19,7 +19,6 @@
   --animate-marquee: marquee var(--duration, 30s) linear infinite;
   --animate-shine: shine 3s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-meteor: meteor 5s linear infinite;
   --animate-spin-slow: spin 14s linear infinite;
 }
 
@@ -33,20 +32,14 @@
   0%, 100% { transform: translateY(0) rotate(-2deg); }
   50% { transform: translateY(-18px) rotate(2deg); }
 }
-@keyframes meteor {
-  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-  70% { opacity: 1; }
-  100% { transform: rotate(215deg) translateX(-700px); opacity: 0; }
-}
 
 html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
   background: var(--bg);
   color: var(--ink);
   color-scheme: dark;
 }
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   background: var(--bg);
@@ -54,10 +47,6 @@ body {
 }
 
 ::selection { background: var(--color-grape); color: #000; }
-
-@media (pointer: fine) {
-  body.has-cursor, body.has-cursor * { cursor: none !important; }
-}
 
 .display {
   font-weight: 900;
@@ -100,10 +89,7 @@ body {
 .no-scrollbar { scrollbar-width: none; }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
 }
 
-@keyframes spotlight {
-  0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
-  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
-}

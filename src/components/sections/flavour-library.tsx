@@ -7,7 +7,6 @@ import { CATEGORIES, FLAVOURS, POD_PRICE, podSrc, rand, type CategoryId, type Fl
 import { useOrder } from "@/lib/order";
 import { flyToCart } from "@/lib/fly";
 import { SectionHead } from "../ui/section-head";
-import { Meteors } from "../ui/meteors";
 import { cn } from "@/lib/utils";
 
 type Filter = "all" | CategoryId;
@@ -33,7 +32,6 @@ export function FlavourLibrary() {
 
   return (
     <section id="flavours" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"><Meteors number={14} /></div>
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHead tag="The flavour library" a="Find your" b="flavour.">
@@ -67,7 +65,7 @@ export function FlavourLibrary() {
           ))}
         </div>
 
-        <motion.div layout className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <motion.div layout className="mt-8 grid grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
           <AnimatePresence mode="popLayout">
             {list.map((f) => (
               <FlavourCard key={f.id} f={f} />
@@ -96,8 +94,8 @@ function FlavourCard({ f }: { f: Flavour }) {
     const r = ref.current.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - 0.5;
     const y = (e.clientY - r.top) / r.height - 0.5;
-    ref.current.style.transform = `perspective(800px) rotateY(${x * 16}deg) rotateX(${-y * 16}deg)`;
-    if (img.current) img.current.style.transform = `translate3d(${x * 18}px, ${y * 12 - 8}px, 0) rotate(${x * 8}deg)`;
+    ref.current.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+    if (img.current) img.current.style.transform = `translate3d(0, -6px, 0)`;
   };
   const onLeave = () => {
     if (ref.current) ref.current.style.transform = "";
@@ -116,27 +114,27 @@ function FlavourCard({ f }: { f: Flavour }) {
         ref={ref}
         onPointerMove={onMove}
         onPointerLeave={onLeave}
-        className="group relative overflow-hidden rounded-3xl border border-white/10 bg-panel transition-[transform,border-color] duration-200 ease-out hover:border-white/25"
+        className="group relative overflow-hidden rounded-2xl border border-white/10 bg-panel transition-[transform,border-color] sm:rounded-3xl duration-200 ease-out hover:border-white/25"
         style={{ ["--c" as string]: f.color }}
       >
         <div className="absolute inset-0 opacity-30 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(80% 60% at 50% 35%, ${f.color}66, transparent 70%)` }} />
         <button
           onClick={() => { addPod(f.id); flyToCart(podSrc(f.id), img.current); }}
           className="relative block w-full text-left"
-          data-cursor="Add"
+         
           aria-label={`Add ${f.name} pod to your order`}
         >
-          <div className="relative flex h-48 items-end justify-center pt-6 sm:h-56">
+          <div className="relative flex h-28 items-end justify-center pt-3 sm:h-56 sm:pt-6">
             <div ref={img} className="relative h-full w-1/2 transition-transform duration-300 ease-out">
               <Image src={podSrc(f.id)} alt={`${f.name} pod`} fill sizes="160px" className="object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,.55)]" />
             </div>
           </div>
-          <div className="relative p-4 pt-3">
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{cat.name}</div>
-            <h3 className="mt-1 text-base font-black uppercase leading-tight sm:text-lg">{f.name}</h3>
-            <div className="mt-3 flex items-center justify-between">
-              <span className="text-sm font-bold text-white/70">{rand(POD_PRICE)}</span>
-              <span className="grid h-9 w-9 place-items-center rounded-full text-xl font-black text-black transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110" style={{ background: f.color }}>+</span>
+          <div className="relative p-2.5 pt-2 sm:p-4 sm:pt-3">
+            <div className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 sm:block">{cat.name}</div>
+            <h3 className="line-clamp-2 min-h-[2.4em] text-[11px] font-black uppercase leading-tight sm:mt-1 sm:min-h-0 sm:text-lg">{f.name}</h3>
+            <div className="mt-2 flex items-center justify-between sm:mt-3">
+              <span className="text-xs font-bold text-white/70 sm:text-sm">{rand(POD_PRICE)}</span>
+              <span className="grid h-7 w-7 place-items-center rounded-full text-lg font-black text-black sm:h-9 sm:w-9 sm:text-xl transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110" style={{ background: f.color }}>+</span>
             </div>
           </div>
         </button>
@@ -147,7 +145,7 @@ function FlavourCard({ f }: { f: Flavour }) {
               initial={{ scale: 0, rotate: -30 }}
               animate={{ scale: 1, rotate: 0 }}
               exit={{ scale: 0 }}
-              className="absolute right-3 top-3 grid h-8 min-w-8 place-items-center rounded-full bg-zap px-2 text-sm font-black text-black shadow-lg"
+              className="absolute right-2 top-2 grid h-7 min-w-7 place-items-center rounded-full bg-zap px-2 text-sm font-black text-black shadow-lg"
             >
               ×{qty}
             </motion.span>

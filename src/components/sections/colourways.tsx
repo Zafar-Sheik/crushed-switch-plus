@@ -48,7 +48,7 @@ export function Colourways() {
 
         <CardContainer intensity={14} containerClassName="-mt-24">
           <CardItem z={60}>
-            <div ref={imgRef} className="relative h-[340px] w-[260px] sm:h-[460px] sm:w-[320px]" data-cursor="Tilt">
+            <div ref={imgRef} className="relative h-[340px] w-[260px] sm:h-[460px] sm:w-[320px]">
               <AnimatePresence mode="popLayout">
                 <motion.div
                   key={d.id}

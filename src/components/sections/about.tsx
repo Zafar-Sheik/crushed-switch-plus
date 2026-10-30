@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import { gsap, SplitText, useGSAP } from "@/lib/gsap";
+import { Reveal } from "../ui/reveal";
 import { CardContainer, CardItem } from "../ui/card-3d";
 import { CardSpotlight } from "../ui/card-spotlight";
 
@@ -14,47 +13,20 @@ const PILLARS = [
 ];
 
 export function About() {
-  const root = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const split = SplitText.create(".about-copy", { type: "words" });
-      gsap.fromTo(
-        split.words,
-        { opacity: 0.12 },
-        {
-          opacity: 1,
-          stagger: 0.05,
-          ease: "none",
-          scrollTrigger: { trigger: ".about-copy", start: "top 80%", end: "bottom 45%", scrub: true },
-        }
-      );
-      gsap.from(".pillar", {
-        y: 60, opacity: 0, rotateX: -30, duration: 0.9, stagger: 0.1, ease: "power3.out",
-        scrollTrigger: { trigger: ".pillars", start: "top 85%" },
-      });
-      gsap.from(".mv-card", {
-        y: 50, opacity: 0, duration: 0.9, stagger: 0.15, ease: "power3.out",
-        scrollTrigger: { trigger: ".mv", start: "top 85%" },
-      });
-    },
-    { scope: root }
-  );
-
   return (
-    <section ref={root} id="about" className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
+    <section id="about" className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
       <div className="pointer-events-none absolute -left-40 top-20 -z-10 h-[500px] w-[500px] rounded-full bg-grape/20 blur-[120px]" />
       <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_.9fr]">
-        <div>
+        <Reveal>
           <span className="tag"><span>Who we are</span></span>
           <h2 className="display mt-5 text-6xl sm:text-8xl">
             Bigger<br />flavours.<br />
             <span className="text-[var(--accent)] transition-colors duration-700">Bolder vibes.</span>
           </h2>
-          <p className="about-copy mt-8 max-w-xl text-xl leading-relaxed text-white sm:text-2xl">
+          <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/80">
             Crushed Switch+ is a refillable pod vape system for adults who want proper flavour without the hassle. You buy the device once, then click in a new pod whenever you want a new flavour. It&apos;s simple, it&apos;s affordable, and it looks good in your pocket.
           </p>
-        </div>
+        </Reveal>
 
         <CardContainer intensity={18}>
           <div className="relative [transform-style:preserve-3d]">
@@ -79,20 +51,20 @@ export function About() {
         </CardContainer>
       </div>
 
-      <div className="mv mt-24 grid gap-5 md:grid-cols-2">
-        <CardSpotlight className="mv-card">
+      <Reveal className="mt-24 grid gap-5 md:grid-cols-2">
+        <CardSpotlight>
           <h3 className="display text-3xl text-[var(--accent)]">Our mission</h3>
           <p className="mt-3 text-lg text-white/75">Give adult vapers big, bold flavour at a fair price, with a device they buy once and enjoy pod after pod.</p>
         </CardSpotlight>
-        <CardSpotlight className="mv-card">
+        <CardSpotlight>
           <h3 className="display text-3xl text-[var(--accent)]">Our vision</h3>
           <p className="mt-3 text-lg text-white/75">To be South Africa&apos;s go-to name in pod vaping, known for a flavour range nobody else can match and a brand people want to be seen with.</p>
         </CardSpotlight>
-      </div>
+      </Reveal>
 
-      <div className="pillars mt-5 grid grid-cols-2 gap-5 [perspective:900px] lg:grid-cols-4">
+      <Reveal className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-4">
         {PILLARS.map((p) => (
-          <CardSpotlight key={p.t} className="pillar p-6 text-center">
+          <CardSpotlight key={p.t} className="p-6 text-center">
             <div className="mx-auto grid h-16 w-16 place-items-center rounded-full border-2 border-[var(--accent)] text-[var(--accent)] transition-all duration-500 group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-black">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">{p.icon}</svg>
             </div>
@@ -100,7 +72,7 @@ export function About() {
             <p className="mt-1 text-sm text-white/60">{p.d}</p>
           </CardSpotlight>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -105,7 +105,7 @@ function KitStation() {
           </div>
           <div className="min-w-0">
             <div className="mb-2 text-xs font-bold uppercase tracking-widest text-white/50">Included pod · <span style={{ color: fl.color }}>{fl.name}</span></div>
-            <div className="no-scrollbar -mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1" data-lenis-prevent>
+            <div className="no-scrollbar -mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
               {FLAVOURS.map((f) => (
                 <button key={f.id} onClick={() => setPod(f.id)} aria-label={f.name} aria-pressed={f.id === pod}
                   className={cn("relative h-16 w-10 shrink-0 rounded-lg border p-1 transition", f.id === pod ? "border-white bg-white/10" : "border-transparent hover:bg-white/5")}>
@@ -164,7 +164,7 @@ function PodWall({ dropRef, onDragState, onOver }: {
                 // a drag that ends over the slip already added the pod
                 if (!dragged.current) addPod(f.id);
               }}
-              data-cursor="Drag"
+             
               aria-label={`Add ${f.name} pod`}
               className="group relative flex aspect-[3/4] touch-none flex-col items-center justify-end rounded-xl border border-white/5 bg-black/30 p-1.5 hover:border-white/20"
               style={{ background: q ? `${f.color}22` : undefined }}
@@ -372,7 +372,7 @@ function Slip({ dropRef, dragging, over }: { dropRef: React.RefObject<HTMLDivEle
                 <div className="text-[11px] text-white/50">{WHATSAPP_DISPLAY}</div>
               </div>
             </div>
-            <div className="max-h-[420px] min-h-[260px] overflow-y-auto bg-[#0b141a] bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:14px_14px] p-4" data-lenis-prevent>
+            <div className="max-h-[420px] min-h-[260px] overflow-y-auto bg-[#0b141a] bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:14px_14px] p-4">
               <div className="ml-auto w-fit max-w-[92%] whitespace-pre-wrap rounded-xl rounded-tr-none bg-[#005c4b] px-3 py-2 text-[13px] leading-relaxed text-white shadow">
                 <WaText text={lines.length ? buildMessage() : "Add something to your stack to preview the message."} />
                 <div className="mt-1 text-right text-[10px] text-white/50">now ✓✓</div>

@@ -6,25 +6,26 @@ Customers build an order on the page and send it to WhatsApp (+27 72 831 8698) w
 ## Stack
 
 - **Next.js 16** (App Router, static prerender) + **Tailwind CSS v4**
-- **GSAP 3** with ScrollTrigger, SplitText, ScrambleText, Draggable + Inertia, Physics2D
-- **Motion** (`motion/react`) for layout animations, drag-and-drop and the floating dock
-- **Lenis** smooth scrolling, synced to GSAP's ticker
-- Aceternity-style components written in-house (`src/components/ui`): spotlight, 3D card, card spotlight, moving border, meteors, lamp, floating dock
+- **Motion** (`motion/react`) for fade-ins, layout animations, drag-and-drop and the floating dock
+- **GSAP 3** for small click-driven effects (fly-to-cart, roulette spin, confetti, number count-ups)
+- Aceternity-style components written in-house (`src/components/ui`): 3D card, card spotlight, moving border, lamp, floating dock
+
+Animations are deliberately calm: nothing hijacks scrolling, content fades in once, and every bigger effect is triggered by a click or tap.
 
 ## What's on the page
 
 | Section | Interaction |
 | --- | --- |
-| Preloader + 18+ gate | Seven-segment "charging" counter in the style of the device's display; age confirmation is remembered |
-| Hero | Draggable 3D ring of all 23 pods (inertia + snap). The selected flavour re-colours the whole site |
-| Marquee | Flavour ribbons whose speed and skew follow scroll velocity |
-| Who we are | Scroll-scrubbed word reveal, 3D tilt poster, spotlight cards |
-| The Switch+ system | Pinned scroll scene: pods click in and out of the device, steps 01–03 track progress |
-| Flavour library | Filter tabs, search, tilt cards, tap to fly a pod into the cart |
-| Colourways | Lamp-lit showroom with 3D flip between the four device colours |
-| Pricing | Moving-border price cards and a stack calculator with an animated LED total |
-| The stack lab (order) | Kit station, drag-and-drop pod wall, flavour roulette, a printed till slip, live WhatsApp preview, and **Order on WhatsApp** |
-| Finale | Raining pods, reasons to buy, contacts, health warning |
+| 18+ gate | Shown once; remembered per browser |
+| Hero | Headline and prices, plus a "try a flavour" panel: tap a colour to swap the pod. The chosen flavour tints the site |
+| Marquee | Slow ribbon of flavour names (pauses on hover) |
+| Who we are | Copy, tilt poster, mission/vision and four pillars |
+| The Switch+ system | Three step cards: get the kit, pick a flavour, switch it up |
+| Flavour library | Filter tabs, search, tap to fly a pod into the cart |
+| Colourways | Lamp-lit showroom, flip between the four device colours |
+| Pricing | Price cards and a stack calculator with an LED total |
+| The stack lab (order) | Kit station, drag-and-drop or tap pod wall, flavour roulette, till slip, live WhatsApp preview, and **Order on WhatsApp** |
+| Finale | Classics line-up, reasons to buy, contacts, health warning |
 
 The order is kept in `localStorage`, so it survives a refresh. Pressing **Order on WhatsApp** opens
 `https://wa.me/27728318698?text=…` with the full order (name, delivery or collection, every line, totals and notes) already filled in.
